@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BidyutBarta | Load Shedding Schedule Bangladesh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --bg: #f5f0e8;
+      --bg-card: #fffdf8;
+      --bg-nav: rgba(245, 240, 232, 0.92);
+      --text: #1a1209;
+      --text-muted: #6b5e42;
+      --accent: #f5a800;
+      --accent-dark: #c98200;
+      --accent-glow: rgba(245, 168, 0, 0.3);
+      --red: #d63a2f;
+      --red-bg: #fff0ee;
+      --green: #27a060;
+      --green-bg: #e8f8f0;
+      --yellow: #e0a000;
+      --yellow-bg: #fff8e0;
+      --border: rgba(26, 18, 9, 0.12);
+      --border-strong: rgba(26, 18, 9, 0.25);
+      --shadow: 0 4px 24px rgba(26,18,9,0.10);
+      --shadow-lg: 0 12px 48px rgba(26,18,9,0.15);
+      --radius: 16px;
+      --nav-h: 72px;
+      --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    [data-theme="dark"] {
+      --bg: #0f0c06;
+      --bg-card: #1c1710;
+      --bg-nav: rgba(15, 12, 6, 0.95);
+      --text: #f5edd8;
+      --text-muted: #9c8c6a;
+      --accent: #f5a800;
+      --accent-dark: #e09500;
+      --accent-glow: rgba(245, 168, 0, 0.25);
+      --red: #f25f53;
+      --red-bg: #2a100d;
+      --green: #3dc47a;
+      --green-bg: #0c2419;
+      --yellow: #f5c842;
+      --yellow-bg: #251e07;
+      --border: rgba(245, 237, 216, 0.10);
+      --border-strong: rgba(245, 237, 216, 0.22);
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.5);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: inherit; border: none; outline: none; }
+    select { font-family: inherit; cursor: pointer; }
+    img { max-width: 100%; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; }
+
+    /* ===== NOISE TEXTURE OVERLAY ===== */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: var(--nav-h);
+      background: var(--bg-nav);
+      backdrop-filter: blur(20px) saturate(1.8);
+      -webkit-backdrop-filter: blur(20px) saturate(1.8);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 clamp(16px, 4vw, 60px);
+      gap: 32px;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .nav-logo {
+      font-family: 'Teko', sans-serif;
+      font-size: 28px; font-weight: 700; letter-spacing: 0.5px;
+      color: var(--text);
+      display: flex; align-items: center; gap: 8px;
+      flex-shrink: 0;
+    }
+    .nav-logo .bolt {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      background: var(--accent);
+      border-radius: 8px;
+      font-size: 20px;
+      box-shadow: 0 0 16px var(--accent-glow);
+      animation: boltPulse 2s ease-in-out infinite;
+    }
+    @keyframes boltPulse {
+      0%, 100% { box-shadow: 0 0 12px var(--accent-glow); }
+      50% { box-shadow: 0 0 28px var(--accent-glow), 0 0 8px var(--accent); }
+    }
+    .nav-links {
+      display: flex; gap: 4px;
+      list-style: none;
+      flex: 1;
+    }
+    .nav-links a {
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 14px; font-weight: 500;
+      color: var(--text-muted);
+      transition: all var(--transition);
+      position: relative;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      background: rgba(245, 168, 0, 0.12);
+      color: var(--text);
+    }
+    .nav-controls {
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+    }
+    .lang-toggle, .dark-toggle {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 8px;
+      border: 1px solid var(--border-strong);
+      font-size: 13px; font-weight: 500;
+      background: transparent; color: var(--text);
+      transition: all var(--transition);
+    }
+    .lang-toggle:hover, .dark-toggle:hover {
+      background: var(--accent); color: #000; border-color: var(--accent);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      padding: 8px; border-radius: 8px; background: transparent;
+      border: 1px solid var(--border-strong);
+    }
+    .hamburger span {
+      display: block; width: 20px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: all var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: var(--bg-nav);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px 24px;
+      z-index: 999;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block; padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-weight: 500; color: var(--text-muted);
+      transition: color var(--transition);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-controls { display: flex; gap: 10px; padding-top: 16px; }
+
+    /* ===== SECTION COMMON ===== */
+    section {
+      position: relative; z-index: 1;
+      padding: clamp(60px, 8vw, 120px) clamp(16px, 5vw, 80px);
+    }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-label::before {
+      content: ''; display: block; width: 24px; height: 2px; background: var(--accent);
+    }
+    .section-title {
+      font-family: 'Teko', sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 700; line-height: 1.05;
+      color: var(--text);
+    }
+    .section-subtitle {
+      font-size: 16px; color: var(--text-muted);
+      max-width: 540px; margin-top: 12px;
+    }
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    /* ===== HERO ===== */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: calc(var(--nav-h) + 40px);
+      overflow: hidden;
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+      max-width: 1160px; margin: 0 auto; width: 100%;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: rgba(245, 168, 0, 0.08);
+      font-size: 13px; font-weight: 500; color: var(--text-muted);
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-tag .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+      animation: pulse 1.5s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.6; }
+    }
+    .hero-title {
+      font-family: 'Teko', sans-serif;
+      font-size: clamp(52px, 7vw, 92px);
+      font-weight: 700; line-height: 0.95;
+      color: var(--text);
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero-title .highlight {
+      color: var(--accent);
+      text-shadow: 0 0 40px var(--accent-glow);
+    }
+    .hero-subtitle {
+      margin-top: 20px; font-size: 17px; color: var(--text-muted); line-height: 1.7;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 12px;
+      background: var(--accent); color: #000;
+      font-size: 15px; font-weight: 600;
+      transition: all var(--transition);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 12px;
+      border: 1px solid var(--border-strong);
+      background: transparent; color: var(--text);
+      font-size: 15px; font-weight: 500;
+      transition: all var(--transition);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-card); border-color: var(--accent); color: var(--accent);
+    }
+    .hero-stats {
+      display: flex; gap: 36px; margin-top: 48px;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .stat { border-left: 3px solid var(--accent); padding-left: 16px; }
+    .stat-num {
+      font-family: 'Teko', sans-serif; font-size: 36px; font-weight: 700;
+      color: var(--text); line-height: 1;
+    }
+    .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative; animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow-lg);
+      position: relative; overflow: hidden;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+      pointer-events: none;
+    }
+    .hc-header {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+    }
+    .hc-title { font-family: 'Teko', sans-serif; font-size: 18px; letter-spacing: 0.5px; }
+    .live-badge {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--red-bg); color: var(--red);
+      padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    }
+    .live-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse 1s infinite; }
+    .schedule-list { display: flex; flex-direction: column; gap: 10px; }
+    .sch-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 16px; border-radius: 12px;
+      background: rgba(245, 168, 0, 0.06); border: 1px solid var(--border);
+    }
+    .sch-time { font-weight: 600; font-size: 14px; }
+    .sch-area { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    }
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+
+    /* Floating elements */
+    .float-el {
+      position: absolute;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 10px 16px;
+      box-shadow: var(--shadow); font-size: 13px; font-weight: 500;
+      white-space: nowrap;
+    }
+    .float-el.top-right { top: -20px; right: -10px; animation: float 3s ease-in-out infinite; }
+    .float-el.bottom-left { bottom: -16px; left: -20px; animation: float 3s 1.5s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== TICKER BAR ===== */
+    .ticker-bar {
+      background: var(--red);
+      color: #fff;
+      padding: 10px 0;
+      overflow: hidden;
+      position: relative; z-index: 1;
+    }
+    .ticker-inner {
+      display: flex; gap: 60px;
+      animation: ticker 30s linear infinite;
+      width: max-content;
+    }
+    .ticker-inner span { white-space: nowrap; font-size: 13px; font-weight: 500; }
+    .ticker-inner .sep { color: rgba(255,255,255,0.4); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ===== SCHEDULE SECTION ===== */
+    #schedule { background: var(--bg); }
+    .schedule-wrapper {
+      display: grid; grid-template-columns: 380px 1fr;
+      gap: 28px; margin-top: 48px;
+    }
+    .search-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      height: fit-content;
+      position: sticky; top: 88px;
+    }
+    .panel-title {
+      font-family: 'Teko', sans-serif; font-size: 22px; margin-bottom: 24px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .field-group { margin-bottom: 20px; }
+    .field-label { font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+    .field-select, .field-input {
+      width: 100%; padding: 12px 16px;
+      border-radius: 10px; border: 1px solid var(--border-strong);
+      background: var(--bg); color: var(--text);
+      font-size: 14px; font-weight: 500;
+      transition: all var(--transition);
+      appearance: none; -webkit-appearance: none;
+    }
+    .field-select:focus, .field-input:focus {
+      outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .select-wrap { position: relative; }
+    .select-arrow {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      pointer-events: none; color: var(--text-muted); font-size: 12px;
+    }
+    .btn-check {
+      width: 100%; padding: 14px;
+      border-radius: 12px; border: none;
+      background: var(--accent); color: #000;
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.3px;
+      transition: all var(--transition);
+      box-shadow: 0 4px 20px var(--accent-glow);
+      margin-top: 8px;
+    }
+    .btn-check:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+    .btn-check:active { transform: scale(0.98); }
+
+    /* Results */
+    .results-panel { display: flex; flex-direction: column; gap: 16px; }
+    .result-empty {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 60px 40px;
+      text-align: center; color: var(--text-muted);
+    }
+    .result-empty .icon { font-size: 48px; margin-bottom: 16px; display: block; }
+    .result-empty p { font-size: 15px; }
+
+    .result-header {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 24px;
+    }
+    .result-area-name { font-family: 'Teko', sans-serif; font-size: 28px; }
+    .result-meta { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+    .result-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: all var(--transition);
+      animation: fadeUp 0.4s ease both;
+    }
+    .result-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), var(--shadow);
+    }
+    .rc-left { display: flex; align-items: center; gap: 16px; }
+    .rc-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(245, 168, 0, 0.10);
+      display: flex; align-items: center; justify-content: center; font-size: 22px;
+      flex-shrink: 0;
+    }
+    .rc-time { font-family: 'Teko', sans-serif; font-size: 22px; line-height: 1; }
+    .rc-duration { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .countdown-box {
+      text-align: right;
+    }
+    .countdown-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .countdown-timer {
+      font-family: 'Teko', sans-serif; font-size: 22px; font-weight: 700; color: var(--red);
+      letter-spacing: 1px; margin-top: 2px;
+    }
+    .countdown-timer.green { color: var(--green); }
+
+    /* Weekly view */
+    .weekly-toggle {
+      display: flex; gap: 10px; margin-top: 28px; margin-bottom: 8px; flex-wrap: wrap;
+    }
+    .week-btn {
+      padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+      border: 1px solid var(--border-strong); background: transparent; color: var(--text-muted);
+      transition: all var(--transition);
+    }
+    .week-btn.active, .week-btn:hover {
+      background: var(--accent); color: #000; border-color: var(--accent);
+    }
+
+    /* Fav button */
+    .btn-fav {
+      padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
+      border: 1px solid var(--border-strong); background: transparent; color: var(--text);
+      transition: all var(--transition); display: flex; align-items: center; gap: 6px;
+    }
+    .btn-fav:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-fav.saved { background: rgba(245,168,0,0.12); border-color: var(--accent); color: var(--accent); }
+
+    /* Saved area pill */
+    .saved-areas { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .saved-pill {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 500;
+      background: rgba(245,168,0,0.10); border: 1px solid var(--border-strong);
+      cursor: pointer; transition: all var(--transition); color: var(--text);
+    }
+    .saved-pill:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+    .saved-pill .remove { color: inherit; font-size: 14px; line-height: 1; }
+
+    /* ===== EMERGENCY SECTION ===== */
+    #emergency { background: var(--bg); }
+    .emergency-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 48px; }
+    .alert-card {
+      border-radius: var(--radius); padding: 24px;
+      position: relative; overflow: hidden;
+      transition: all var(--transition);
+      animation: fadeUp 0.5s ease both;
+    }
+    .alert-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .alert-card.critical {
+      background: var(--red-bg); border: 1px solid rgba(214, 58, 47, 0.3);
+    }
+    .alert-card.warning {
+      background: var(--yellow-bg); border: 1px solid rgba(224, 160, 0, 0.3);
+    }
+    .alert-card.info {
+      background: var(--green-bg); border: 1px solid rgba(39, 160, 96, 0.3);
+    }
+    .alert-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: 4px 0 0 4px;
+    }
+    .alert-card.critical::before { background: var(--red); }
+    .alert-card.warning::before { background: var(--yellow); }
+    .alert-card.info::before { background: var(--green); }
+    .alert-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+    .alert-title {
+      font-family: 'Teko', sans-serif; font-size: 20px; margin-bottom: 8px;
+    }
+    .alert-card.critical .alert-title { color: var(--red); }
+    .alert-card.warning .alert-title { color: var(--yellow); }
+    .alert-card.info .alert-title { color: var(--green); }
+    .alert-body { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .alert-meta { font-size: 11px; color: var(--text-muted); margin-top: 14px; display: flex; align-items: center; gap: 6px; }
+    .alert-areas { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+    .area-chip {
+      padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 500;
+      border: 1px solid currentColor; opacity: 0.7;
+    }
+
+    /* ===== TIPS SECTION ===== */
+    #tips {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 48px; }
+    .tip-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      transition: all var(--transition);
+      animation: fadeUp 0.5s ease both;
+      position: relative; overflow: hidden;
+    }
+    .tip-card::after {
+      content: ''; position: absolute; bottom: -30px; right: -30px;
+      width: 100px; height: 100px; border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+      pointer-events: none; opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .tip-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .tip-card:hover::after { opacity: 1; }
+    .tip-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: rgba(245, 168, 0, 0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 16px;
+      transition: all var(--transition);
+    }
+    .tip-card:hover .tip-icon { background: var(--accent); transform: scale(1.1); }
+    .tip-title { font-family: 'Teko', sans-serif; font-size: 20px; margin-bottom: 6px; }
+    .tip-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .tip-tag {
+      display: inline-block; margin-top: 12px;
+      padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 600;
+      background: rgba(245,168,0,0.12); color: var(--accent);
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    #about { background: var(--bg); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 48px; }
+    .about-text p { color: var(--text-muted); font-size: 15px; line-height: 1.8; margin-bottom: 20px; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+    .feature-list li {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 500;
+    }
+    .feature-list li::before {
+      content: '✓'; display: flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+      background: var(--green-bg); color: var(--green); font-size: 12px; font-weight: 700;
+    }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .astat-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      text-align: center;
+      transition: all var(--transition);
+    }
+    .astat-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+    .astat-num {
+      font-family: 'Teko', sans-serif; font-size: 48px; font-weight: 700;
+      color: var(--accent); line-height: 1;
+    }
+    .astat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: relative; z-index: 1;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 48px clamp(16px, 5vw, 80px) 28px;
+    }
+    .footer-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo { font-family: 'Teko', sans-serif; font-size: 24px; display: flex; align-items: center; gap: 8px; }
+    .footer-copy { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--text-muted); transition: color var(--transition); }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-credit {
+      max-width: 1160px; margin: 24px auto 0;
+      padding-top: 24px; border-top: 1px solid var(--border);
+      text-align: center; font-size: 12px; color: var(--text-muted);
+    }
+
+    /* ===== LOADING OVERLAY ===== */
+    .loading-overlay {
+      position: fixed; inset: 0; background: var(--bg); z-index: 9999;
+      display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px;
+      transition: opacity 0.5s ease;
+    }
+    .loading-overlay.hidden { opacity: 0; pointer-events: none; }
+    .loader-bolt { font-size: 48px; animation: boltSpin 0.8s linear infinite; }
+    @keyframes boltSpin { from { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.3); } to { transform: rotate(360deg) scale(1); } }
+    .loader-text { font-family: 'Teko', sans-serif; font-size: 20px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; }
+
+    /* ===== POPUP ===== */
+    .popup-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 2000; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity var(--transition);
+      backdrop-filter: blur(4px);
+    }
+    .popup-overlay.show { opacity: 1; pointer-events: all; }
+    .popup {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px; max-width: 440px; width: 90%;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(20px) scale(0.95);
+      transition: transform var(--transition);
+      text-align: center;
+    }
+    .popup-overlay.show .popup { transform: translateY(0) scale(1); }
+    .popup-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+    .popup-title { font-family: 'Teko', sans-serif; font-size: 28px; margin-bottom: 8px; }
+    .popup-body { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; }
+    .popup-close {
+      padding: 12px 28px; border-radius: 10px;
+      background: var(--accent); color: #000;
+      font-size: 14px; font-weight: 700;
+      transition: all var(--transition);
+    }
+    .popup-close:hover { transform: scale(1.05); box-shadow: 0 4px 16px var(--accent-glow); }
+
+    /* ===== TOAST ===== */
+    .toast-container {
+      position: fixed; bottom: 24px; right: 24px; z-index: 1500;
+      display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+    }
+    .toast {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 20px;
+      box-shadow: var(--shadow-lg);
+      font-size: 14px; font-weight: 500;
+      display: flex; align-items: center; gap: 10px;
+      transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+      max-width: 320px;
+    }
+    .toast.show { transform: translateX(0); }
+    .toast.success { border-left: 3px solid var(--green); }
+    .toast.error { border-left: 3px solid var(--red); }
+    .toast.info { border-left: 3px solid var(--accent); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .schedule-wrapper { grid-template-columns: 1fr; }
+      .search-panel { position: static; }
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+    @media (max-width: 600px) {
+      .hero-stats { gap: 20px; flex-wrap: wrap; }
+      .tips-grid { grid-template-columns: 1fr 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .tips-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Bangla font override when in Bangla mode */
+    [data-lang="bn"] .lang-en { display: none; }
+    [data-lang="en"] .lang-bn { display: none; }
+    [data-lang="bn"] {
+      font-family: 'DM Sans', 'Noto Sans Bengali', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loader">
+  <span class="loader-bolt">⚡</span>
+  <span class="loader-text">BidyutBarta Loading...</span>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup">
+    <span class="popup-icon" id="popupIcon">⚡</span>
+    <div class="popup-title" id="popupTitle">Alert</div>
+    <div class="popup-body" id="popupBody">Message here.</div>
+    <button class="popup-close" onclick="closePopup()">Got It</button>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <span class="bolt">⚡</span>
+    BidyutBarta
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="lang-en active">Home</a><a href="#home" class="lang-bn active">হোম</a></li>
+    <li><a href="#schedule" class="lang-en">Check Schedule</a><a href="#schedule" class="lang-bn">সময়সূচি</a></li>
+    <li><a href="#emergency" class="lang-en">Emergency</a><a href="#emergency" class="lang-bn">জরুরি</a></li>
+    <li><a href="#tips" class="lang-en">Power Tips</a><a href="#tips" class="lang-bn">বিদ্যুৎ টিপস</a></li>
+    <li><a href="#about" class="lang-en">About</a><a href="#about" class="lang-bn">সম্পর্কে</a></li>
+  </ul>
+  <div class="nav-controls">
+    <button class="lang-toggle" onclick="toggleLang()" title="Toggle Language">
+      <span id="langBtnText">বাংলা</span>
+    </button>
+    <button class="dark-toggle" onclick="toggleDark()" id="darkBtn" title="Toggle Dark Mode">🌙</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMenu()"><span class="lang-en">Home</span><span class="lang-bn">হোম</span></a>
+  <a href="#schedule" onclick="closeMenu()"><span class="lang-en">Check Schedule</span><span class="lang-bn">সময়সূচি দেখুন</span></a>
+  <a href="#emergency" onclick="closeMenu()"><span class="lang-en">Emergency Notice</span><span class="lang-bn">জরুরি বিজ্ঞপ্তি</span></a>
+  <a href="#tips" onclick="closeMenu()"><span class="lang-en">Power Saving Tips</span><span class="lang-bn">বিদ্যুৎ সাশ্রয় টিপস</span></a>
+  <a href="#about" onclick="closeMenu()"><span class="lang-en">About</span><span class="lang-bn">সম্পর্কে</span></a>
+  <div class="mobile-controls">
+    <button class="lang-toggle" onclick="toggleLang()"><span id="langBtnTextMobile">বাংলা</span></button>
+    <button class="dark-toggle" onclick="toggleDark()" id="darkBtnMobile">🌙</button>
+  </div>
+</div>
+
+<!-- ===== HERO SECTION ===== -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">
+        <span class="dot"></span>
+        <span class="lang-en">Live Schedule Tracker for Bangladesh</span>
+        <span class="lang-bn">বাংলাদেশের লাইভ লোডশেডিং ট্র্যাকার</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="lang-en">Know Your<br><span class="highlight">Power Cut</span><br>In Advance</span>
+        <span class="lang-bn">আগেই জানুন<br><span class="highlight">লোডশেডিং</span><br>সময়সূচি</span>
+      </h1>
+      <p class="hero-subtitle">
+        <span class="lang-en">Select your area and instantly see scheduled power outages, emergency alerts, and power-saving tips — all in one place.</span>
+        <span class="lang-bn">আপনার এলাকা বেছে নিন এবং তাৎক্ষণিকভাবে লোডশেডিং সময়সূচি, জরুরি বিজ্ঞপ্তি এবং বিদ্যুৎ সাশ্রয়ের টিপস দেখুন।</span>
+      </p>
+      <div class="hero-actions">
+        <a href="#schedule" class="btn-primary">
+          <span class="lang-en">⚡ Check Your Area</span>
+          <span class="lang-bn">⚡ এলাকা চেক করুন</span>
+        </a>
+        <a href="#emergency" class="btn-secondary">
+          <span class="lang-en">🚨 Emergency Notices</span>
+          <span class="lang-bn">🚨 জরুরি বিজ্ঞপ্তি</span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">64+</div>
+          <div class="stat-label lang-en">Districts Covered</div>
+          <div class="stat-label lang-bn">জেলা আচ্ছাদিত</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">8</div>
+          <div class="stat-label lang-en">Divisions</div>
+          <div class="stat-label lang-bn">বিভাগ</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label lang-en">Schedule Access</div>
+          <div class="stat-label lang-bn">সময়সূচি অ্যাক্সেস</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="float-el top-right">🔴 Mirpur – 2h outage now</div>
+      <div class="hero-card">
+        <div class="hc-header">
+          <span class="hc-title">TODAY'S SCHEDULE – DHAKA</span>
+          <span class="live-badge"><span class="dot"></span>LIVE</span>
+        </div>
+        <div class="schedule-list">
+          <div class="sch-item">
+            <div>
+              <div class="sch-time">10:00 AM – 12:00 PM</div>
+              <div class="sch-area">Mirpur, Section 10</div>
+            </div>
+            <span class="badge badge-red">🔴 Scheduled</span>
+          </div>
+          <div class="sch-item">
+            <div>
+              <div class="sch-time">02:00 PM – 04:00 PM</div>
+              <div class="sch-area">Uttara, Sector 7</div>
+            </div>
+            <span class="badge badge-red">🔴 Scheduled</span>
+          </div>
+          <div class="sch-item">
+            <div>
+              <div class="sch-time">06:00 PM – 07:00 PM</div>
+              <div class="sch-area">Dhanmondi, R-27</div>
+            </div>
+            <span class="badge badge-yellow">🟡 Possible</span>
+          </div>
+          <div class="sch-item">
+            <div>
+              <div class="sch-time">All other times</div>
+              <div class="sch-area">Gulshan, Banani</div>
+            </div>
+            <span class="badge badge-green">🟢 Normal</span>
+          </div>
+        </div>
+      </div>
+      <div class="float-el bottom-left">💡 7 power-saving tips →</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-inner" id="tickerContent">
+    <span>🚨 Mirpur – 3hr outage scheduled tomorrow 9AM–12PM</span>
+    <span class="sep">•</span>
+    <span>⚡ Storm warning: Sylhet may face disruptions tonight</span>
+    <span class="sep">•</span>
+    <span>🔧 Maintenance: Dhanmondi feeder offline 2PM–5PM</span>
+    <span class="sep">•</span>
+    <span>⚠️ Khulna load shedding extended by 2 hours today</span>
+    <span class="sep">•</span>
+    <span>💡 Tip: Charge devices before 6PM peak hours</span>
+    <span class="sep">•</span>
+    <span>🚨 Mirpur – 3hr outage scheduled tomorrow 9AM–12PM</span>
+    <span class="sep">•</span>
+    <span>⚡ Storm warning: Sylhet may face disruptions tonight</span>
+    <span class="sep">•</span>
+    <span>🔧 Maintenance: Dhanmondi feeder offline 2PM–5PM</span>
+    <span class="sep">•</span>
+    <span>⚠️ Khulna load shedding extended by 2 hours today</span>
+    <span class="sep">•</span>
+    <span>💡 Tip: Charge devices before 6PM peak hours</span>
+  </div>
+</div>
+
+<!-- ===== SCHEDULE SECTION ===== -->
+<section id="schedule">
+  <div class="container">
+    <div class="section-label lang-en">Area Schedule</div>
+    <div class="section-label lang-bn">এলাকার সময়সূচি</div>
+    <h2 class="section-title">
+      <span class="lang-en">Check Your<br>Load Shedding Schedule</span>
+      <span class="lang-bn">লোডশেডিং<br>সময়সূচি দেখুন</span>
+    </h2>
+    <p class="section-subtitle">
+      <span class="lang-en">Select your division and area to view today's power outage schedule with real-time status.</span>
+      <span class="lang-bn">আপনার বিভাগ ও এলাকা বেছে নিন এবং আজকের লোডশেডিং সময়সূচি দেখুন।</span>
+    </p>
+
+    <div class="schedule-wrapper">
+      <!-- Search Panel -->
+      <div class="search-panel">
+        <div class="panel-title">🔍 <span class="lang-en">Find Schedule</span><span class="lang-bn">সময়সূচি খুঁজুন</span></div>
+
+        <div class="field-group">
+          <div class="field-label lang-en">Division</div>
+          <div class="field-label lang-bn">বিভাগ</div>
+          <div class="select-wrap">
+            <select class="field-select" id="divisionSelect" onchange="updateAreas()">
+              <option value="">-- Select Division --</option>
+              <option value="dhaka">Dhaka / ঢাকা</option>
+              <option value="chattogram">Chattogram / চট্টগ্রাম</option>
+              <option value="rajshahi">Rajshahi / রাজশাহী</option>
+              <option value="khulna">Khulna / খুলনা</option>
+              <option value="sylhet">Sylhet / সিলেট</option>
+              <option value="barishal">Barishal / বরিশাল</option>
+              <option value="mymensingh">Mymensingh / ময়মনসিংহ</option>
+              <option value="rangpur">Rangpur / রংপুর</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label lang-en">Area / Thana</div>
+          <div class="field-label lang-bn">এলাকা / থানা</div>
+          <div class="select-wrap">
+            <select class="field-select" id="areaSelect">
+              <option value="">-- Select Area --</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label lang-en">Date (Optional)</div>
+          <div class="field-label lang-bn">তারিখ (ঐচ্ছিক)</div>
+          <input type="date" class="field-input" id="dateSelect" />
+        </div>
+
+        <button class="btn-check" onclick="checkSchedule()">
+          ⚡ <span class="lang-en">Check Schedule</span><span class="lang-bn">সময়সূচি দেখুন</span>
+        </button>
+
+        <!-- Saved Areas -->
+        <div id="savedSection" style="margin-top:24px; display:none;">
+          <div class="field-label lang-en" style="margin-bottom:10px;">⭐ Saved Areas</div>
+          <div class="field-label lang-bn" style="margin-bottom:10px;">⭐ সংরক্ষিত এলাকা</div>
+          <div class="saved-areas" id="savedAreas"></div>
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="results-panel" id="resultsPanel">
+        <div class="result-empty" id="resultEmpty">
+          <span class="icon">🔌</span>
+          <p class="lang-en">Select your division and area above, then click <strong>"Check Schedule"</strong> to view power outage times for your area.</p>
+          <p class="lang-bn">উপরে বিভাগ ও এলাকা বেছে নিন, তারপর <strong>"সময়সূচি দেখুন"</strong> বাটনে ক্লিক করুন।</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EMERGENCY SECTION ===== -->
+<section id="emergency">
+  <div class="container">
+    <div class="section-label lang-en">Emergency Notices</div>
+    <div class="section-label lang-bn">জরুরি বিজ্ঞপ্তি</div>
+    <h2 class="section-title">
+      <span class="lang-en">🚨 Active Alerts &<br>Outage Notices</span>
+      <span class="lang-bn">🚨 সক্রিয় সতর্কতা<br>ও বিজ্ঞপ্তি</span>
+    </h2>
+    <p class="section-subtitle">
+      <span class="lang-en">Stay informed about urgent power disruptions, maintenance work, and emergency outages across Bangladesh.</span>
+      <span class="lang-bn">বাংলাদেশে জরুরি বিদ্যুৎ বিপর্যয়, রক্ষণাবেক্ষণ কাজ ও জরুরি বিচ্ছিন্নতা সম্পর্কে আপডেট থাকুন।</span>
+    </p>
+    <div class="emergency-grid" id="emergencyGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIPS SECTION ===== -->
+<section id="tips">
+  <div class="container">
+    <div class="section-label lang-en">Power Saving Tips</div>
+    <div class="section-label lang-bn">বিদ্যুৎ সাশ্রয় টিপস</div>
+    <h2 class="section-title">
+      <span class="lang-en">💡 Smart Power<br>Saving Guide</span>
+      <span class="lang-bn">💡 বুদ্ধিমান বিদ্যুৎ<br>সাশ্রয় গাইড</span>
+    </h2>
+    <p class="section-subtitle">
+      <span class="lang-en">Practical tips to prepare for power outages and reduce electricity consumption during peak hours.</span>
+      <span class="lang-bn">লোডশেডিংয়ের জন্য প্রস্তুতি ও পিক আওয়ারে বিদ্যুৎ খরচ কমানোর ব্যবহারিক টিপস।</span>
+    </p>
+    <div class="tips-grid" id="tipsGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section id="about">
+  <div class="container">
+    <div class="section-label lang-en">About This Project</div>
+    <div class="section-label lang-bn">এই প্রজেক্ট সম্পর্কে</div>
+    <h2 class="section-title">
+      <span class="lang-en">Why BidyutBarta<br>Was Built</span>
+      <span class="lang-bn">কেন BidyutBarta<br>তৈরি করা হয়েছে</span>
+    </h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="lang-en">In Bangladesh, millions of people face unpredictable load shedding every day. Students miss online classes, businesses lose productivity, and families face daily household disruption — all because there was no simple way to know when the power would go out.</p>
+        <p class="lang-bn">বাংলাদেশে প্রতিদিন লক্ষ লক্ষ মানুষ অনিয়মিত লোডশেডিংয়ের সম্মুখীন হন। শিক্ষার্থীরা অনলাইন ক্লাস মিস করেন, ব্যবসা ক্ষতিগ্রস্ত হয়, এবং পরিবার প্রতিদিন ভোগান্তিতে পড়েন।</p>
+        <p class="lang-en"><strong>BidyutBarta</strong> was created as a frontend prototype to solve this problem — putting clear, area-wise schedule data in the hands of every Bangladeshi. It's built with pure HTML, CSS, and JavaScript, proving that meaningful web apps don't need complex backends.</p>
+        <p class="lang-bn"><strong>BidyutBarta</strong> এই সমস্যার সমাধান হিসেবে তৈরি করা হয়েছে — প্রতিটি বাংলাদেশীর হাতে এলাকাভিত্তিক সময়সূচির তথ্য পৌঁছে দিতে। এটি শুধু HTML, CSS এবং JavaScript দিয়ে তৈরি।</p>
+        <ul class="feature-list">
+          <li><span class="lang-en">Area-wise schedule filtering with JavaScript</span><span class="lang-bn">JavaScript দিয়ে এলাকাভিত্তিক ফিল্টারিং</span></li>
+          <li><span class="lang-en">Emergency outage alert system</span><span class="lang-bn">জরুরি বিচ্ছিন্নতা সতর্কতা ব্যবস্থা</span></li>
+          <li><span class="lang-en">Bilingual Bangla/English interface</span><span class="lang-bn">বাংলা/ইংরেজি দ্বিভাষিক ইন্টারফেস</span></li>
+          <li><span class="lang-en">localStorage for saving favorite areas</span><span class="lang-bn">পছন্দের এলাকা সংরক্ষণে localStorage</span></li>
+          <li><span class="lang-en">Dark mode for night-time use</span><span class="lang-bn">রাতের ব্যবহারে ডার্ক মোড</span></li>
+          <li><span class="lang-en">Countdown timer to next outage</span><span class="lang-bn">পরবর্তী লোডশেডিংয়ের কাউন্টডাউন টাইমার</span></li>
+          <li><span class="lang-en">Scalable to real backend integration</span><span class="lang-bn">বাস্তব ব্যাকেন্ড সংযুক্তিতে স্কেলযোগ্য</span></li>
+        </ul>
+      </div>
+      <div class="about-stats">
+        <div class="astat-card">
+          <div class="astat-num">8</div>
+          <div class="astat-label lang-en">Divisions Supported</div>
+          <div class="astat-label lang-bn">সমর্থিত বিভাগ</div>
+        </div>
+        <div class="astat-card">
+          <div class="astat-num">40+</div>
+          <div class="astat-label lang-en">Areas in Database</div>
+          <div class="astat-label lang-bn">ডেটাবেসে এলাকা</div>
+        </div>
+        <div class="astat-card">
+          <div class="astat-num">100%</div>
+          <div class="astat-label lang-en">Frontend Only</div>
+          <div class="astat-label lang-bn">সম্পূর্ণ ফ্রন্টএন্ড</div>
+        </div>
+        <div class="astat-card">
+          <div class="astat-num">2</div>
+          <div class="astat-label lang-en">Languages</div>
+          <div class="astat-label lang-bn">ভাষা সমর্থন</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span>⚡</span> BidyutBarta</div>
+      <div class="footer-copy lang-en">Bangladesh Load Shedding Schedule Tracker</div>
+      <div class="footer-copy lang-bn">বাংলাদেশ লোডশেডিং সময়সূচি ট্র্যাকার</div>
+    </div>
+    <div class="footer-links">
+      <a href="#home" class="lang-en">Home</a>
+      <a href="#home" class="lang-bn">হোম</a>
+      <a href="#schedule" class="lang-en">Schedule</a>
+      <a href="#schedule" class="lang-bn">সময়সূচি</a>
+      <a href="#emergency" class="lang-en">Emergency</a>
+      <a href="#emergency" class="lang-bn">জরুরি</a>
+      <a href="#tips" class="lang-en">Tips</a>
+      <a href="#tips" class="lang-bn">টিপস</a>
+    </div>
+  </div>
+  <div class="footer-credit">
+    <span class="lang-en">⚡ Frontend Prototype — Built with HTML, CSS & JavaScript only. Data is static for demonstration. | Solving Bangladesh's load shedding problem, one area at a time.</span>
+    <span class="lang-bn">⚡ ফ্রন্টএন্ড প্রোটোটাইপ — শুধুমাত্র HTML, CSS ও JavaScript দিয়ে তৈরি। ডেটা প্রদর্শনের জন্য স্ট্যাটিক।</span>
+  </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// ============================================================
+// DATA — Static JSON representing schedule data
+// ============================================================
+
+const AREAS_BY_DIVISION = {
+  dhaka: ["Mirpur", "Uttara", "Dhanmondi", "Gulshan", "Banani", "Mohammadpur", "Rampura", "Badda", "Motijheel", "Old Dhaka"],
+  chattogram: ["Agrabad", "Nasirabad", "Panchlaish", "Halishahar", "Khulshi", "Bayazid", "Chandgaon", "Sitakund"],
+  rajshahi: ["Shaheb Bazar", "Rajpara", "Boalia", "Motihar", "Puthia", "Bagha"],
+  khulna: ["Khulna Sadar", "Sonadanga", "Khalishpur", "Daulatpur", "Boyra", "Rupsha"],
+  sylhet: ["Sylhet Sadar", "Ambarkhana", "Zindabazar", "Moulvibazar", "Sunamganj", "Habiganj"],
+  barishal: ["Barishal Sadar", "Natun Bazar", "Kashipur", "Wazirpur", "Agailjhara"],
+  mymensingh: ["Mymensingh Sadar", "Muktagacha", "Trishal", "Bhaluka", "Gaffargaon"],
+  rangpur: ["Rangpur Sadar", "Mithapukur", "Badarganj", "Kaunia", "Pirganj"]
+};
+
+const SCHEDULE_DATA = [
+  // DHAKA
+  { division:"dhaka", area:"Mirpur", slots:[{time:"10:00 AM – 12:00 PM",status:"scheduled",duration:"2 hrs"},{time:"06:00 PM – 07:30 PM",status:"possible",duration:"1.5 hrs"}]},
+  { division:"dhaka", area:"Uttara", slots:[{time:"08:00 AM – 10:00 AM",status:"scheduled",duration:"2 hrs"},{time:"03:00 PM – 05:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"dhaka", area:"Dhanmondi", slots:[{time:"11:00 AM – 12:30 PM",status:"scheduled",duration:"1.5 hrs"},{time:"08:00 PM – 09:00 PM",status:"possible",duration:"1 hr"}]},
+  { division:"dhaka", area:"Gulshan", slots:[{time:"All Day",status:"clear",duration:"—"}]},
+  { division:"dhaka", area:"Banani", slots:[{time:"All Day",status:"clear",duration:"—"}]},
+  { division:"dhaka", area:"Mohammadpur", slots:[{time:"09:00 AM – 11:00 AM",status:"scheduled",duration:"2 hrs"},{time:"04:00 PM – 05:30 PM",status:"scheduled",duration:"1.5 hrs"},{time:"09:00 PM – 10:00 PM",status:"possible",duration:"1 hr"}]},
+  { division:"dhaka", area:"Rampura", slots:[{time:"01:00 PM – 03:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"dhaka", area:"Badda", slots:[{time:"07:00 AM – 09:00 AM",status:"scheduled",duration:"2 hrs"},{time:"05:00 PM – 06:30 PM",status:"possible",duration:"1.5 hrs"}]},
+  { division:"dhaka", area:"Motijheel", slots:[{time:"12:00 PM – 01:30 PM",status:"scheduled",duration:"1.5 hrs"}]},
+  { division:"dhaka", area:"Old Dhaka", slots:[{time:"10:30 AM – 12:30 PM",status:"scheduled",duration:"2 hrs"},{time:"07:00 PM – 08:30 PM",status:"scheduled",duration:"1.5 hrs"}]},
+  // CHATTOGRAM
+  { division:"chattogram", area:"Agrabad", slots:[{time:"09:00 AM – 11:00 AM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"chattogram", area:"Nasirabad", slots:[{time:"01:00 PM – 03:00 PM",status:"scheduled",duration:"2 hrs"},{time:"07:00 PM – 08:00 PM",status:"possible",duration:"1 hr"}]},
+  { division:"chattogram", area:"Panchlaish", slots:[{time:"All Day",status:"clear",duration:"—"}]},
+  { division:"chattogram", area:"Halishahar", slots:[{time:"11:00 AM – 01:00 PM",status:"scheduled",duration:"2 hrs"},{time:"05:00 PM – 06:00 PM",status:"possible",duration:"1 hr"}]},
+  { division:"chattogram", area:"Khulshi", slots:[{time:"All Day",status:"clear",duration:"—"}]},
+  { division:"chattogram", area:"Bayazid", slots:[{time:"08:00 AM – 10:30 AM",status:"scheduled",duration:"2.5 hrs"}]},
+  { division:"chattogram", area:"Chandgaon", slots:[{time:"02:00 PM – 04:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"chattogram", area:"Sitakund", slots:[{time:"10:00 AM – 12:00 PM",status:"scheduled",duration:"2 hrs"},{time:"04:00 PM – 06:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  // RAJSHAHI
+  { division:"rajshahi", area:"Shaheb Bazar", slots:[{time:"09:00 AM – 11:00 AM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"rajshahi", area:"Rajpara", slots:[{time:"01:00 PM – 03:00 PM",status:"possible",duration:"2 hrs"}]},
+  { division:"rajshahi", area:"Boalia", slots:[{time:"10:00 AM – 12:00 PM",status:"scheduled",duration:"2 hrs"},{time:"06:00 PM – 07:00 PM",status:"possible",duration:"1 hr"}]},
+  { division:"rajshahi", area:"Motihar", slots:[{time:"All Day",status:"clear",duration:"—"}]},
+  { division:"rajshahi", area:"Puthia", slots:[{time:"08:00 AM – 10:00 AM",status:"scheduled",duration:"2 hrs"},{time:"03:00 PM – 05:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"rajshahi", area:"Bagha", slots:[{time:"11:00 AM – 01:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  // KHULNA
+  { division:"khulna", area:"Khulna Sadar", slots:[{time:"09:30 AM – 12:00 PM",status:"scheduled",duration:"2.5 hrs"},{time:"06:00 PM – 08:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"khulna", area:"Sonadanga", slots:[{time:"01:00 PM – 03:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"khulna", area:"Khalishpur", slots:[{time:"All Day",status:"clear",duration:"—"}]},
+  { division:"khulna", area:"Daulatpur", slots:[{time:"10:00 AM – 12:00 PM",status:"possible",duration:"2 hrs"}]},
+  { division:"khulna", area:"Boyra", slots:[{time:"08:00 AM – 10:00 AM",status:"scheduled",duration:"2 hrs"},{time:"04:00 PM – 06:00 PM",status:"possible",duration:"2 hrs"}]},
+  { division:"khulna", area:"Rupsha", slots:[{time:"11:00 AM – 01:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  // SYLHET
+  { division:"sylhet", area:"Sylhet Sadar", slots:[{time:"10:00 AM – 12:00 PM",status:"scheduled",duration:"2 hrs"},{time:"08:00 PM – 09:00 PM",status:"possible",duration:"1 hr"}]},
+  { division:"sylhet", area:"Ambarkhana", slots:[{time:"01:00 PM – 03:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"sylhet", area:"Zindabazar", slots:[{time:"All Day",status:"clear",duration:"—"}]},
+  { division:"sylhet", area:"Moulvibazar", slots:[{time:"09:00 AM – 11:30 AM",status:"scheduled",duration:"2.5 hrs"},{time:"05:00 PM – 07:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"sylhet", area:"Sunamganj", slots:[{time:"10:00 AM – 01:00 PM",status:"scheduled",duration:"3 hrs"}]},
+  { division:"sylhet", area:"Habiganj", slots:[{time:"08:00 AM – 10:00 AM",status:"scheduled",duration:"2 hrs"},{time:"04:00 PM – 05:30 PM",status:"possible",duration:"1.5 hrs"}]},
+  // BARISHAL
+  { division:"barishal", area:"Barishal Sadar", slots:[{time:"09:00 AM – 11:00 AM",status:"scheduled",duration:"2 hrs"},{time:"05:00 PM – 07:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"barishal", area:"Natun Bazar", slots:[{time:"01:00 PM – 03:30 PM",status:"scheduled",duration:"2.5 hrs"}]},
+  { division:"barishal", area:"Kashipur", slots:[{time:"All Day",status:"clear",duration:"—"}]},
+  { division:"barishal", area:"Wazirpur", slots:[{time:"10:00 AM – 12:00 PM",status:"possible",duration:"2 hrs"}]},
+  { division:"barishal", area:"Agailjhara", slots:[{time:"08:00 AM – 10:00 AM",status:"scheduled",duration:"2 hrs"},{time:"06:00 PM – 08:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  // MYMENSINGH
+  { division:"mymensingh", area:"Mymensingh Sadar", slots:[{time:"10:00 AM – 12:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"mymensingh", area:"Muktagacha", slots:[{time:"01:00 PM – 03:00 PM",status:"scheduled",duration:"2 hrs"},{time:"07:00 PM – 08:30 PM",status:"possible",duration:"1.5 hrs"}]},
+  { division:"mymensingh", area:"Trishal", slots:[{time:"All Day",status:"clear",duration:"—"}]},
+  { division:"mymensingh", area:"Bhaluka", slots:[{time:"09:00 AM – 11:00 AM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"mymensingh", area:"Gaffargaon", slots:[{time:"11:00 AM – 01:00 PM",status:"scheduled",duration:"2 hrs"},{time:"05:00 PM – 06:30 PM",status:"possible",duration:"1.5 hrs"}]},
+  // RANGPUR
+  { division:"rangpur", area:"Rangpur Sadar", slots:[{time:"08:30 AM – 10:30 AM",status:"scheduled",duration:"2 hrs"},{time:"03:00 PM – 05:00 PM",status:"possible",duration:"2 hrs"}]},
+  { division:"rangpur", area:"Mithapukur", slots:[{time:"10:00 AM – 12:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"rangpur", area:"Badarganj", slots:[{time:"All Day",status:"clear",duration:"—"}]},
+  { division:"rangpur", area:"Kaunia", slots:[{time:"01:00 PM – 03:00 PM",status:"scheduled",duration:"2 hrs"},{time:"07:00 PM – 09:00 PM",status:"scheduled",duration:"2 hrs"}]},
+  { division:"rangpur", area:"Pirganj", slots:[{time:"09:00 AM – 11:30 AM",status:"scheduled",duration:"2.5 hrs"}]}
+];
+
+const EMERGENCY_DATA = [
+  {
+    type: "critical",
+    icon: "🚨",
+    title_en: "Mirpur Zone Emergency Outage",
+    title_bn: "মিরপুর জোন জরুরি বিচ্ছিন্নতা",
+    body_en: "Due to urgent transformer maintenance, Mirpur areas (Section 1–12) will face a 3-hour power outage tomorrow from 9:00 AM – 12:00 PM. DESCO crews will be on-site.",
+    body_bn: "ট্রান্সফর্মার মেরামতের কারণে আগামীকাল সকাল ৯টা–দুপুর ১২টা পর্যন্ত মিরপুর (সেকশন ১–১২) তে ৩ ঘণ্টা বিদ্যুৎ বিচ্ছিন্ন থাকবে।",
+    areas: ["Mirpur-1", "Mirpur-2", "Mirpur-10", "Mirpur-12"],
+    date: "Tomorrow, 9:00 AM – 12:00 PM"
+  },
+  {
+    type: "critical",
+    icon: "⛈️",
+    title_en: "Storm Warning – Sylhet Division",
+    title_bn: "ঝড় সতর্কতা – সিলেট বিভাগ",
+    body_en: "Severe storm conditions are expected tonight in Sylhet. Power disruptions likely across multiple feeders. Emergency teams are on standby. Please charge all devices before 6 PM.",
+    body_bn: "আজ রাতে সিলেটে তীব্র ঝড়ের পূর্বাভাস রয়েছে। বিদ্যুৎ বিচ্ছিন্নতার সম্ভাবনা আছে। সন্ধ্যা ৬টার আগে সব ডিভাইস চার্জ করুন।",
+    areas: ["Sylhet Sadar", "Ambarkhana", "Moulvibazar"],
+    date: "Tonight after 8:00 PM"
+  },
+  {
+    type: "warning",
+    icon: "🔧",
+    title_bn: "রক্ষণাবেক্ষণ কাজ – ধানমন্ডি ফিডার",
+    title_en: "Maintenance Work – Dhanmondi Feeder",
+    body_en: "Scheduled feeder maintenance in Dhanmondi area. Power will be off from 2:00 PM to 5:00 PM today. This is routine maintenance to improve reliability.",
+    body_bn: "ধানমন্ডি ফিডার মেরামতের কারণে আজ দুপুর ২টা–বিকাল ৫টা পর্যন্ত বিদ্যুৎ বন্ধ থাকবে।",
+    areas: ["Dhanmondi R/A", "Jigatola", "Shankar"],
+    date: "Today, 2:00 PM – 5:00 PM"
+  },
+  {
+    type: "warning",
+    icon: "⚡",
+    title_en: "High Demand Alert – Peak Hours",
+    title_bn: "উচ্চ চাহিদা সতর্কতা – পিক আওয়ার",
+    body_en: "Electricity demand is critically high today across Dhaka division. Load shedding duration may be extended by 30–60 minutes in some areas. Please reduce non-essential usage.",
+    body_bn: "আজ ঢাকা বিভাগে বিদ্যুতের চাহিদা অত্যন্ত বেশি। কিছু এলাকায় লোডশেডিং ৩০–৬০ মিনিট বাড়তে পারে।",
+    areas: ["All Dhaka Areas"],
+    date: "Today, 6:00 PM – 10:00 PM"
+  },
+  {
+    type: "info",
+    icon: "✅",
+    title_en: "Restoration Complete – Khulna",
+    title_bn: "সংযোগ পুনরুদ্ধার সম্পন্ন – খুলনা",
+    body_en: "Power has been fully restored in Khulna Sadar and Sonadanga areas after yesterday's emergency maintenance. Normal schedule resumes from today.",
+    body_bn: "গতকালের জরুরি মেরামতের পর খুলনা সদর ও সোনাডাঙ্গা এলাকায় বিদ্যুৎ পুনরুদ্ধার সম্পন্ন হয়েছে।",
+    areas: ["Khulna Sadar", "Sonadanga"],
+    date: "Today – Fully Restored"
+  },
+  {
+    type: "info",
+    icon: "📋",
+    title_en: "New Winter Schedule Effective",
+    title_bn: "নতুন শীতকালীন সময়সূচি কার্যকর",
+    body_en: "DESCO and DPDC have updated load shedding schedules for the winter season. Duration per slot reduced to 1–2 hours. Updated schedules are now reflected on this platform.",
+    body_bn: "DESCO ও DPDC শীতকালীন লোডশেডিং সময়সূচি আপডেট করেছে। প্রতি স্লটের সময় ১–২ ঘণ্টায় কমানো হয়েছে।",
+    areas: ["All Divisions"],
+    date: "Effective from this week"
+  }
+];
+
+const TIPS_DATA = [
+  { icon:"🔋", title_en:"Charge Before Peak Hours", title_bn:"পিক আওয়ারের আগে চার্জ করুন", body_en:"Charge your phone, laptop, and power banks before 6 PM. Evening peak hours (6–10 PM) are when outages are most likely.", body_bn:"বিকাল ৬টার আগে ফোন, ল্যাপটপ এবং পাওয়ার ব্যাংক চার্জ করুন।", tag_en:"Essential", tag_bn:"অপরিহার্য" },
+  { icon:"💡", title_en:"Switch to LED Lighting", title_bn:"LED বাল্ব ব্যবহার করুন", body_en:"LED lights use up to 80% less electricity than incandescent bulbs and produce less heat, reducing your AC load too.", body_bn:"LED বাল্ব সাধারণ বাল্বের চেয়ে ৮০% কম বিদ্যুৎ ব্যবহার করে।", tag_en:"Save Money", tag_bn:"অর্থ সাশ্রয়" },
+  { icon:"❄️", title_en:"Smart Refrigerator Use", title_bn:"স্মার্ট ফ্রিজ ব্যবহার", body_en:"Keep refrigerator doors closed during outages. A full freezer stays cold for 48 hours; a half-full one for 24 hours.", body_bn:"লোডশেডিংয়ের সময় ফ্রিজ খুলবেন না। পূর্ণ ফ্রিজার ৪৮ ঘণ্টা ঠাণ্ডা থাকে।", tag_en:"Practical", tag_bn:"ব্যবহারিক" },
+  { icon:"🔌", title_en:"Unplug Standby Devices", title_bn:"স্ট্যান্ডবাই ডিভাইস আনপ্লাগ করুন", body_en:"TVs, chargers, and routers on standby consume 10–15% of your total electricity. Unplug when not in use.", body_bn:"স্ট্যান্ডবাই ডিভাইস মোট বিদ্যুতের ১০–১৫% ব্যবহার করে। অব্যবহারকালে প্লাগ খুলুন।", tag_en:"Easy Win", tag_bn:"সহজ সঞ্চয়" },
+  { icon:"🌬️", title_en:"Use Fans Over AC", title_bn:"AC-এর বদলে ফ্যান ব্যবহার করুন", body_en:"A ceiling fan uses about 75W, while an AC uses 1500W+. Use fans during mild weather to dramatically cut consumption.", body_bn:"সিলিং ফ্যান মাত্র ৭৫ ওয়াট ব্যবহার করে, AC ১৫০০ ওয়াট+।", tag_en:"Big Impact", tag_bn:"বড় প্রভাব" },
+  { icon:"🕯️", title_en:"Keep Emergency Supplies Ready", title_bn:"জরুরি সরবরাহ প্রস্তুত রাখুন", body_en:"Keep rechargeable LED lanterns, candles, and a power bank ready. Consider a portable UPS for your router and important devices.", body_bn:"রিচার্জেবল লণ্ঠন, মোমবাতি এবং পাওয়ার ব্যাংক সবসময় প্রস্তুত রাখুন।", tag_en:"Be Prepared", tag_bn:"প্রস্তুত থাকুন" },
+  { icon:"📅", title_en:"Plan Heavy Tasks Early", title_bn:"ভারী কাজ সকালে করুন", body_en:"Washing machines, irons, and ovens — use these appliances in the morning (7–11 AM) when power is usually stable.", body_bn:"ওয়াশিং মেশিন, ইস্ত্রি, ওভেন — সকাল ৭–১১টার মধ্যে ব্যবহার করুন।", tag_en:"Smart Planning", tag_bn:"স্মার্ট পরিকল্পনা" },
+  { icon:"☀️", title_en:"Consider Solar Solutions", title_bn:"সোলার সমাধান বিবেচনা করুন", body_en:"Even a small solar panel + battery system can power lights, fans, and phone chargers during outages. Government subsidies available.", body_bn:"একটি ছোট সোলার প্যানেল + ব্যাটারি লাইট, ফ্যান ও ফোন চার্জ করতে পারে।", tag_en:"Long-term", tag_bn:"দীর্ঘমেয়াদী" }
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let currentResults = null;
+let savedAreas = JSON.parse(localStorage.getItem('bidyutbarta_saved') || '[]');
+let countdownIntervals = [];
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  // Hide loader
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    setTimeout(() => document.getElementById('loader').style.display = 'none', 600);
+  }, 1200);
+
+  // Set today's date as default
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('dateSelect').value = today;
+
+  // Render emergency & tips
+  renderEmergency();
+  renderTips();
+  renderSavedAreas();
+
+  // Check theme preference
+  if (localStorage.getItem('bidyutbarta_dark') === 'true') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('darkBtn').textContent = '☀️';
+    document.getElementById('darkBtnMobile').textContent = '☀️';
+  }
+
+  // Check language preference
+  if (localStorage.getItem('bidyutbarta_lang') === 'bn') {
+    document.documentElement.setAttribute('data-lang', 'bn');
+    document.getElementById('langBtnText').textContent = 'English';
+    document.getElementById('langBtnTextMobile').textContent = 'English';
+  }
+
+  // Popup after 3 seconds
+  setTimeout(() => {
+    showPopup('⚡', 'Power Outage Alert!', 'Multiple areas in Dhaka & Sylhet have extended schedules today due to high demand. Check your area now!');
+  }, 3000);
+
+  // Highlight active nav on scroll
+  window.addEventListener('scroll', updateActiveNav);
+});
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+function updateActiveNav() {
+  const sections = ['home', 'schedule', 'emergency', 'tips', 'about'];
+  const scrollY = window.scrollY + 100;
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = el.offsetTop, bottom = top + el.offsetHeight;
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(a => {
+      if (a.getAttribute('href') === '#' + id) {
+        a.classList.toggle('active', scrollY >= top && scrollY < bottom);
+      } else {
+        if (a.getAttribute('href') === '#' + id) a.classList.remove('active');
+      }
+    });
+  });
+}
+
+// ============================================================
+// DARK MODE & LANGUAGE
+// ============================================================
+function toggleDark() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  const icon = isDark ? '🌙' : '☀️';
+  document.getElementById('darkBtn').textContent = icon;
+  document.getElementById('darkBtnMobile').textContent = icon;
+  localStorage.setItem('bidyutbarta_dark', !isDark);
+  showToast(isDark ? '☀️ Light mode activated' : '🌙 Dark mode activated', 'info');
+}
+
+function toggleLang() {
+  const isBn = document.documentElement.getAttribute('data-lang') === 'bn';
+  document.documentElement.setAttribute('data-lang', isBn ? 'en' : 'bn');
+  const btnText = isBn ? 'বাংলা' : 'English';
+  document.getElementById('langBtnText').textContent = btnText;
+  document.getElementById('langBtnTextMobile').textContent = btnText;
+  localStorage.setItem('bidyutbarta_lang', isBn ? 'en' : 'bn');
+  showToast(isBn ? '🌐 English activated' : '🌐 বাংলা সক্রিয় হয়েছে', 'info');
+}
+
+function getLang() { return document.documentElement.getAttribute('data-lang') || 'en'; }
+
+// ============================================================
+// AREA DROPDOWN UPDATE
+// ============================================================
+function updateAreas() {
+  const division = document.getElementById('divisionSelect').value;
+  const areaSelect = document.getElementById('areaSelect');
+  areaSelect.innerHTML = '<option value="">-- Select Area --</option>';
+  if (division && AREAS_BY_DIVISION[division]) {
+    AREAS_BY_DIVISION[division].forEach(area => {
+      const opt = document.createElement('option');
+      opt.value = area; opt.textContent = area;
+      areaSelect.appendChild(opt);
+    });
+  }
+}
+
+// ============================================================
+// SCHEDULE CHECK
+// ============================================================
+function checkSchedule() {
+  const division = document.getElementById('divisionSelect').value;
+  const area = document.getElementById('areaSelect').value;
+  const date = document.getElementById('dateSelect').value;
+
+  if (!division) { showToast('⚠️ Please select a division first', 'error'); return; }
+  if (!area) { showToast('⚠️ Please select an area', 'error'); return; }
+
+  // Clear old countdowns
+  countdownIntervals.forEach(clearInterval);
+  countdownIntervals = [];
+
+  // Filter data
+  const result = SCHEDULE_DATA.find(d => d.division === division && d.area === area);
+  const panel = document.getElementById('resultsPanel');
+  const empty = document.getElementById('resultEmpty');
+  const isBn = getLang() === 'bn';
+
+  if (!result) {
+    empty.style.display = 'flex';
+    panel.innerHTML = '';
+    panel.appendChild(empty);
+    showToast('No data found for this area.', 'error');
+    return;
+  }
+
+  empty.style.display = 'none';
+  const selectedDate = date ? new Date(date).toLocaleDateString('en-GB', {weekday:'long', year:'numeric', month:'long', day:'numeric'}) : 'Today';
+  const divName = document.getElementById('divisionSelect').options[document.getElementById('divisionSelect').selectedIndex].text;
+
+  // Header
+  const isSaved = savedAreas.some(s => s.division === division && s.area === area);
+  let html = `
+    <div class="result-header">
+      <div>
+        <div class="result-area-name">📍 ${area}</div>
+        <div class="result-meta">${divName} Division &nbsp;·&nbsp; ${selectedDate}</div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+        <button class="btn-fav ${isSaved ? 'saved' : ''}" id="favBtn" onclick="toggleFavorite('${division}', '${area}')">
+          ${isSaved ? '⭐ Saved' : '☆ Save Area'}
+        </button>
+      </div>
+    </div>`;
+
+  // Days tabs (weekly view)
+  const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  html += `<div class="weekly-toggle">`;
+  days.forEach((d,i) => {
+    html += `<button class="week-btn ${i===0?'active':''}" onclick="selectDay(this)">${d}</button>`;
+  });
+  html += `</div>`;
+
+  // Schedule cards
+  result.slots.forEach((slot, i) => {
+    const badgeClass = slot.status === 'scheduled' ? 'badge-red' : slot.status === 'possible' ? 'badge-yellow' : 'badge-green';
+    const badgeText_en = slot.status === 'scheduled' ? '🔴 Scheduled' : slot.status === 'possible' ? '🟡 Possible Outage' : '🟢 No Outage';
+    const badgeText_bn = slot.status === 'scheduled' ? '🔴 নির্ধারিত' : slot.status === 'possible' ? '🟡 সম্ভাব্য বিচ্ছিন্নতা' : '🟢 কোনো বিচ্ছিন্নতা নেই';
+    const icon = slot.status === 'scheduled' ? '⚡' : slot.status === 'possible' ? '⚠️' : '✅';
+    const iconBg = slot.status === 'clear' ? 'background:var(--green-bg)' : 'background:rgba(245,168,0,0.1)';
+
+    const countdownId = `cd_${i}`;
+    html += `
+      <div class="result-card" style="animation-delay:${i*0.1}s">
+        <div class="rc-left">
+          <div class="rc-icon" style="${iconBg}">${icon}</div>
+          <div>
+            <div class="rc-time">${slot.time}</div>
+            <div class="rc-duration">
+              <span class="lang-en">Duration: ${slot.duration}</span>
+              <span class="lang-bn">সময়কাল: ${slot.duration}</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+          <span class="badge ${badgeClass}">
+            <span class="lang-en">${badgeText_en}</span>
+            <span class="lang-bn">${badgeText_bn}</span>
+          </span>
+          ${slot.status !== 'clear' ? `
+          <div class="countdown-box">
+            <div class="countdown-label lang-en">Starts in</div>
+            <div class="countdown-label lang-bn">শুরু হবে</div>
+            <div class="countdown-timer ${slot.status === 'possible' ? 'green' : ''}" id="${countdownId}">--:--:--</div>
+          </div>` : ''}
+        </div>
+      </div>`;
+  });
+
+  panel.innerHTML = html;
+
+  // Start countdowns
+  result.slots.forEach((slot, i) => {
+    if (slot.status !== 'clear') startCountdown(`cd_${i}`, slot.time);
+  });
+
+  showToast(`✅ Schedule loaded for ${area}`, 'success');
+  currentResults = { division, area };
+
+  // Update fav button live
+  updateFavButton();
+}
+
+// ============================================================
+// COUNTDOWN TIMER
+// ============================================================
+function startCountdown(elementId, timeRange) {
+  // Parse the start time from range like "10:00 AM – 12:00 PM"
+  const match = timeRange.match(/^(\d+:\d+\s+[AP]M)/);
+  if (!match) return;
+
+  function tick() {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    const now = new Date();
+    const target = parseTimeToday(match[1]);
+    if (!target) return;
+    const diff = target - now;
+    if (diff <= 0) {
+      el.textContent = 'NOW';
+      el.style.color = 'var(--red)';
+      return;
+    }
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+
+  tick();
+  const iv = setInterval(tick, 1000);
+  countdownIntervals.push(iv);
+}
+
+function parseTimeToday(timeStr) {
+  const [time, period] = timeStr.trim().split(/\s+/);
+  const [h, m] = time.split(':').map(Number);
+  const date = new Date();
+  let hours = h;
+  if (period === 'PM' && h !== 12) hours += 12;
+  if (period === 'AM' && h === 12) hours = 0;
+  date.setHours(hours, m, 0, 0);
+  return date;
+}
+
+// ============================================================
+// WEEKLY DAY TOGGLE
+// ============================================================
+function selectDay(btn) {
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ============================================================
+// FAVORITE AREAS (localStorage)
+// ============================================================
+function toggleFavorite(division, area) {
+  const idx = savedAreas.findIndex(s => s.division === division && s.area === area);
+  if (idx > -1) {
+    savedAreas.splice(idx, 1);
+    showToast(`Removed ${area} from saved areas`, 'info');
+  } else {
+    savedAreas.push({ division, area });
+    showToast(`⭐ ${area} saved!`, 'success');
+  }
+  localStorage.setItem('bidyutbarta_saved', JSON.stringify(savedAreas));
+  updateFavButton();
+  renderSavedAreas();
+}
+
+function updateFavButton() {
+  if (!currentResults) return;
+  const btn = document.getElementById('favBtn');
+  if (!btn) return;
+  const isSaved = savedAreas.some(s => s.division === currentResults.division && s.area === currentResults.area);
+  btn.className = `btn-fav ${isSaved ? 'saved' : ''}`;
+  btn.textContent = isSaved ? '⭐ Saved' : '☆ Save Area';
+  btn.onclick = () => toggleFavorite(currentResults.division, currentResults.area);
+}
+
+function renderSavedAreas() {
+  const section = document.getElementById('savedSection');
+  const container = document.getElementById('savedAreas');
+  if (savedAreas.length === 0) {
+    section.style.display = 'none'; return;
+  }
+  section.style.display = 'block';
+  container.innerHTML = savedAreas.map(s => `
+    <span class="saved-pill" onclick="loadSaved('${s.division}','${s.area}')">
+      📍 ${s.area}
+      <span class="remove" onclick="event.stopPropagation(); toggleFavorite('${s.division}','${s.area}')">×</span>
+    </span>
+  `).join('');
+}
+
+function loadSaved(division, area) {
+  document.getElementById('divisionSelect').value = division;
+  updateAreas();
+  setTimeout(() => {
+    document.getElementById('areaSelect').value = area;
+    checkSchedule();
+    document.getElementById('schedule').scrollIntoView({ behavior: 'smooth' });
+  }, 50);
+}
+
+// ============================================================
+// RENDER EMERGENCY
+// ============================================================
+function renderEmergency() {
+  const grid = document.getElementById('emergencyGrid');
+  const isBn = getLang() === 'bn';
+  grid.innerHTML = EMERGENCY_DATA.map((e, i) => `
+    <div class="alert-card ${e.type}" style="animation-delay:${i*0.1}s">
+      <span class="alert-icon">${e.icon}</span>
+      <div class="alert-title">
+        <span class="lang-en">${e.title_en}</span>
+        <span class="lang-bn">${e.title_bn}</span>
+      </div>
+      <div class="alert-body">
+        <span class="lang-en">${e.body_en}</span>
+        <span class="lang-bn">${e.body_bn}</span>
+      </div>
+      <div class="alert-areas">
+        ${e.areas.map(a => `<span class="area-chip" style="color: ${e.type==='critical'?'var(--red)':e.type==='warning'?'var(--yellow)':'var(--green)'}">${a}</span>`).join('')}
+      </div>
+      <div class="alert-meta">🕐 ${e.date}</div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// RENDER TIPS
+// ============================================================
+function renderTips() {
+  const grid = document.getElementById('tipsGrid');
+  grid.innerHTML = TIPS_DATA.map((t, i) => `
+    <div class="tip-card" style="animation-delay:${i*0.08}s">
+      <div class="tip-icon">${t.icon}</div>
+      <div class="tip-title">
+        <span class="lang-en">${t.title_en}</span>
+        <span class="lang-bn">${t.title_bn}</span>
+      </div>
+      <div class="tip-body">
+        <span class="lang-en">${t.body_en}</span>
+        <span class="lang-bn">${t.body_bn}</span>
+      </div>
+      <span class="tip-tag">
+        <span class="lang-en">${t.tag_en}</span>
+        <span class="lang-bn">${t.tag_bn}</span>
+      </span>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// POPUP
+// ============================================================
+function showPopup(icon, title, body) {
+  document.getElementById('popupIcon').textContent = icon;
+  document.getElementById('popupTitle').textContent = title;
+  document.getElementById('popupBody').textContent = body;
+  document.getElementById('popupOverlay').classList.add('show');
+}
+function closePopup() {
+  document.getElementById('popupOverlay').classList.remove('show');
+}
+document.getElementById('popupOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closePopup();
+});
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(message, type = 'info') {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `<span>${message}</span>`;
+  container.appendChild(toast);
+  setTimeout(() => toast.classList.add('show'), 50);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400);
+  }, 3500);
+}
+</script>
+
+</body>
+</html>
