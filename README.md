@@ -138,6 +138,6 @@ It motivates me to build more useful projects.
 
 # 📜 License
 
-This project is built for **educational and demonstration purposes**.
-
-© 2025 BidyutBarta
+<p align="center">
+<img src="https://capsule-render.vercel.app/api?type=speech&height=301&color=gradient&text=©%202025%20BidyutBarta%20This%20project%20is%20built%20for%20educational%20and%20demonstration%20purposes..%20%20&reversal=true&fontSize=20&textBg=false&section=footer&animation=fadeIn"/>
+</p>
