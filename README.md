@@ -1,5 +1,9 @@
 # BidyutBarta-
 # ⚡ BidyutBarta
+<p align="center">
+<img src="https://capsule-render.vercel.app/api?type=wave&height=301&color=gradient&text=%20BidyutBarta⚡%20Bangladesh%20Load%20Shedding%20Schedule%20Tracker&reversal=false&fontSize=27&textBg=false&section=header&animation=scaleIn"/>
+</p>
+
 
 <h1 align="center">
 ⚡ Bangladesh Load Shedding Schedule Tracker
@@ -139,5 +143,5 @@ It motivates me to build more useful projects.
 # 📜 License
 
 <p align="center">
-<img src="https://capsule-render.vercel.app/api?type=speech&height=301&color=gradient&text=©%202025%20BidyutBarta%20This%20project%20is%20built%20for%20educational%20and%20demonstration%20purposes..%20%20&reversal=true&fontSize=20&textBg=false&section=footer&animation=fadeIn"/>
+<img src="https://capsule-render.vercel.app/api?type=wave&height=301&color=gradient&text=©%202025%20BidyutBarta%20This%20project%20is%20built%20for%20educational%20and%20demonstration%20purposes..&reversal=true&fontSize=18&textBg=false&section=footer&animation=twinkling"/>
 </p>
