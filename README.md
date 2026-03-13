@@ -71,7 +71,9 @@ Example:
 ![Power Tips](image-2.png)
 ![সক্রিয় সতর্কতা ও বিজ্ঞপ্তি](image-3.png)
 ![Developer](image-4.png)
+## 📸 Preview
 
+![Preview](https://raw.githubusercontent.com/nafisatabassumnusrat/BidyutBarta-/gh-pages/images/preview.png)
 
 ---
 
