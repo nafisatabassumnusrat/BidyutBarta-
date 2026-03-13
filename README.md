@@ -5,9 +5,7 @@
 </p>
 
 
-<h1 align="center">
-⚡ Bangladesh Load Shedding Schedule Tracker
-</h1>
+
 
 <p align="center">
 
