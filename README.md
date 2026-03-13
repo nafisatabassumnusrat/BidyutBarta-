@@ -1,4 +1,3 @@
-# BidyutBarta-
 # ⚡ BidyutBarta
 <p align="center">
 <img src="https://capsule-render.vercel.app/api?type=wave&height=301&color=gradient&text=%20BidyutBarta⚡%20Bangladesh%20Load%20Shedding%20Schedule%20Tracker&reversal=false&fontSize=27&textBg=false&section=header&animation=scaleIn"/>
